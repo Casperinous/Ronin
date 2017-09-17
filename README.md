@@ -18,6 +18,43 @@ First, execute the command ```adb forward tcp:5039 tcp:5039``` in order to forwa
 Then copy gdbserver and gdb.setup into /data/local/tmp and attach or start the process you want to debug.
 Finally, start gdb-multiarch and attach to port with number 5039.
 
+
+## Running
+
+A simple output of Ronin, through logcat would be:
+```
+09-17 17:14:08.582   927   927 I Ronin   : [*]---------------------------------------------
+09-17 17:14:08.582   927   927 I Ronin   : [*] Starting Ronin - Test example targeting libc and connect function.
+09-17 17:14:08.582   927   927 I Ronin   : [*] Searching for libc.so
+09-17 17:14:08.586   927   927 I Ronin   : [*] Segment Info > Start : 0x74c8fb1000 End : 0x74c906d000 Perm : -1128883919 Fd : f Fdn : 0 Ino : 1623 Name: /system/lib64/libc.so
+09-17 17:14:08.586   927   927 I Ronin   : [*] Segment Info > Start : 0x74c906d000 End : 0x74c9073000 Perm : 1 Fd : f Fdn : 0 Ino : 1623 Name: /system/lib64/libc.so
+09-17 17:14:08.586   927   927 I Ronin   : [*] Segment Info > Start : 0x74c9073000 End : 0x74c9075000 Perm : 17 Fd : f Fdn : 0 Ino : 1623 Name: /system/lib64/libc.so
+09-17 17:14:08.588   927   927 I Ronin   : [+] Architecture is 64 bit
+09-17 17:14:08.588   927   927 I Ronin   : [*] Trying to set load_bias
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found PT_PHDR at address 0x74c8fb1040
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found PT_DYNAMIC at address 0x74c9071d30
+09-17 17:14:08.588   927   927 I Ronin   : [+] Dynamic section from 0x74c9071d30 to 0x74c9071f30
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_PLTGOT at address 0x74c9071d30
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_PTLRELSZ at address 0x74c9071d40
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_JMPREL at address 0x74c9071d50
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_RELA at address 0x74c9071d70
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_RELASZ at address 0x74c9071d80
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_SYMTAB at address 0x74c9071db0
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_STRTAB at address 0x74c9071dd0
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found DT_GNU_HASH at address 0x74c9071df0
+09-17 17:14:08.588   927   927 I Ronin   : [+] SONAME ---> libc.so
+09-17 17:14:08.588   927   927 I Ronin   : [+] Succesfully extracted information of shared library libc.so
+09-17 17:14:08.588   927   927 I Ronin   : [+] Found requested symbol connect
+09-17 17:14:08.588   927   927 I Ronin   : [*] About to perform the hook on relocation 0x74c9072580
+09-17 17:14:08.589   927   927 I Ronin   : [+] Replaced symbol's [connect] relocation 0x74c9072580 with 0x74c598978c 
+09-17 17:14:08.589   927   927 I Ronin   : [*]---------------------------------------------
+09-17 17:14:08.589   927   927 I Ronin   : [+] JavaVM address --> 0x74c6ee7f00
+```
+
+
+## Notes
+A lot of time was spent on looking and understanding other people's code. In particular, the majority of time was spent on Android bionic ( https://android.googlesource.com/platform/bionic/+/master/linker ) and core systems ( https://android.googlesource.com/platform/system/core/+/master/libnativeloader ) but also in the approaches of other people implementing hooking functionalities. 
+
 ## Roadmap
 The roadmap of Ronin is:
 - Fix bugs with the dt_* hashes in order to perform faster symbol searches ( right now a linear search is performed )
