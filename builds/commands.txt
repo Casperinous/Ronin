@@ -1,0 +1,4 @@
+adb forward tcp:5039 tcp:5039
+~/AndroidNDK/android-ndk-r15b/ndk-build NDK_DEBUG=1
+~/AndroidNDK/android-ndk-r15b/ndk-build clean
+
