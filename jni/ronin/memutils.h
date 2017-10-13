@@ -29,7 +29,7 @@ void
 free_arr(void **arr, int size);
 
 bool 
-copy_str(char * source, char * dest, size_t length);
+copy_str(char * source, char ** dest, size_t length);
 
 
 unsigned long 

@@ -5,7 +5,7 @@
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <unistd.h>
-
+#include "log.h"
 
 
 size_t 
@@ -31,17 +31,19 @@ free_arr(void **arr, int size)
 }
 
 bool
-copy_str(char * source, char * dest, size_t length)
+copy_str(char * source, char ** dest, size_t length)
 {
+	
 	if ( !source || length <= 0 ) return false;
 
 	bool res = false;
 
-	dest = (char *)malloc((sizeof(char) * length) + 1);
-	if( dest )
+	*dest = (char *)malloc(sizeof(char) * (length + 1));
+	if( *dest )
 	{
-		strlcpy(source,dest,length);
-		dest[length] = '\0';
+		strlcpy(*dest, source, length);
+		*(dest + length) = 0x00;
+		LOGX(INFO,"Pointer :> %p content :> %s",*dest, *dest);
 		res = true;
 	}
 
