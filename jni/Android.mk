@@ -1,4 +1,5 @@
 TOP_PATH := $(call my-dir)
+CJSON_PATH :=?
 
 
 # Build executable Ronin
@@ -7,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := ronin
 LOCAL_PATH := $(TOP_PATH)/ronin
-LOCAL_SRC_FILES := ronin.c mapsharedlib.c stringutils.c memutils.c hash.c sharedlib.c elfutils.c thread.c symbol.c hook.c app.c jvm.c
+LOCAL_SRC_FILES := ronin.c mapsharedlib.c stringutils.c memutils.c hash.c sharedlib.c elfutils.c thread.c symbol.c hook.c app.c jvm.c storage.c config.c CJSON_PATH/cJSON.c sll.c
 LOCAL_LDLIBS := -llog
 include $(BUILD_SHARED_LIBRARY)
 
