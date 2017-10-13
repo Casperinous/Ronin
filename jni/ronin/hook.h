@@ -11,6 +11,7 @@ typedef struct {
 	unsigned long org_addr;
 	unsigned long rpd_addr;
 	char * func_name;
+	char * exp_name;
 	char * trg_so;
 	char * exp_so;
 	bool ishooked;
@@ -19,7 +20,7 @@ typedef struct {
 
 
 hook * 
-init_hook_str(unsigned long rpd_addr, char * func_name,char * trg_so, char * exp_so);
+init_hook_str(char * func_name, char * exp_name, char * trg_so, char * exp_so);
 
 void 
 hook_func(shared_lib * lib, hook * hk);

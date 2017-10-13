@@ -8,7 +8,7 @@
 
 	
 hook * 
-init_hook_str(unsigned long rpd_addr, char * func_name,char * trg_so, char * exp_so)
+init_hook_str(char * func_name, char * exp_name, char * trg_so, char * exp_so)
 {
 	hook * hk = (hook *)malloc(sizeof(hook));
 	if( !trg_so || !exp_so) return NULL;
@@ -16,8 +16,9 @@ init_hook_str(unsigned long rpd_addr, char * func_name,char * trg_so, char * exp
 	if( hk )
 	{
 		hk->org_addr = 0;
-		hk->rpd_addr = rpd_addr;
+		hk->rpd_addr = 0;
 		hk->func_name = func_name;
+		hk->exp_name = exp_name;
 		hk->trg_so = trg_so;
 		hk->exp_so = exp_so;
 		hk->ishooked = false;
