@@ -15,7 +15,7 @@ typedef struct
 app * 
 get_app_info();
 
-static void 
+static char * 
 get_app_cmdline();
 
 
